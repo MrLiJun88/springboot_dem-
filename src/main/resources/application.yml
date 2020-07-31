@@ -1,0 +1,12 @@
+# 关闭thymeleaf的缓存
+spring:
+  thymeleaf:
+    cache: false
+
+  messages:
+    basename: i18n.login
+#设置项目访问名称
+server:
+  servlet:
+    context-path: /hello
+
