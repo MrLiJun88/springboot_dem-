@@ -33,6 +33,10 @@ public class EmployeeMapper {
 
     private static Integer initId = 1007;
 
+    /**
+     * 保存和更新方法
+     * @param employee
+     */
     public void save(Employee employee){
         if(null == employee.getEmpId()){
             employee.setEmpId(initId++);

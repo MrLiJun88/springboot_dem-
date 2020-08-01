@@ -5,8 +5,13 @@ spring:
 
   messages:
     basename: i18n.login
+  mvc:
+    format:
+      date: yyyy-MM-dd
 #设置项目访问名称
 server:
   servlet:
     context-path: /hello
+
+
 

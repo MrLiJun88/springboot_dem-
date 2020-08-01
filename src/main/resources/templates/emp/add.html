@@ -51,33 +51,41 @@
         <div th:replace="~{commons/commons::sidebar(active='list')}"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <form class="form-horizontal">
+            <form th:action="@{/saveemp}" method="post">
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <label>姓名</label>
+                    <input type="text" name="lastName" class="form-control" placeholder="李俊">
+                </div>
+                <div class="form-group">
+                    <label>邮箱</label>
+                    <input type="email" name="email" class="form-control" placeholder="lijun@qq.com">
+                </div>
+                <div class="form-group">
+                    <label>性别</label><br/>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" value="1" checked="checked">
+                        <label class="form-check-label">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" value="0">
+                        <label class="form-check-label">女</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                    </div>
+                    <label>部门选择</label>
+                    <select class="form-control" name="department.departId">
+                        <option
+                                th:each="dept:${departments}"
+                                th:text="${dept.getDepartmentName()}"
+                                th:value="${dept.getDepartId()}">
+                        </option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
+                    <label>出生日期</label>
+                    <input type="text" name="birth" class="form-control" placeholder="2020-8-1">
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Sign in</button>
-                    </div>
-                </div>
+                <button type="submit" class="btn btn-primary">添加</button>
             </form>
         </main>
     </div>
