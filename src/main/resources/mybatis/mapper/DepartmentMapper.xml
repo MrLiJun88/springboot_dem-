@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njcit.springboot_demo.mapper.DepartmentMapper">
+
+    <resultMap id="department" type="com.njcit.springboot_demo.pojo.Department">
+        <id property="departId" column="dept_id" jdbcType="INTEGER"></id>
+        <result property="departmentName" column="dept_name" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <select id="getDepartments" resultMap="department">
+        select * from t_dept;
+    </select>
+
+</mapper>

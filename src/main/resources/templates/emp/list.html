@@ -71,7 +71,7 @@
                         <td th:text="${emp.getEmpId()}"/>
                         <td th:text="${emp.getLastName()}"/>
                         <td th:text="${emp.getEmail()}"/>
-                        <td th:text="${emp.getGender()==0? '男':'女'}"/>
+                        <td th:text="${emp.getGender().equals('M')? '男':'女'}"/>
                         <!-- emp.department.getDepartmentName() -->
                         <td th:text="${emp.department.getDepartmentName()}"/>
                         <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"/>

@@ -2,9 +2,30 @@
 spring:
   thymeleaf:
     cache: false
+  #配置数据库资源
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/ssmcrud?serverTimezone=UTC&useUnicode=true&characherEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #配置druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
 
+    initalSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+  #配置国际化
   messages:
     basename: i18n.login
+  #设置日期格式
   mvc:
     format:
       date: yyyy-MM-dd
@@ -12,6 +33,15 @@ spring:
 server:
   servlet:
     context-path: /hello
+
+#整合mybatis
+mybatis:
+  type-aliases-package: com.njcit.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+
+
 
 
 

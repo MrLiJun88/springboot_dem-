@@ -1,9 +1,9 @@
 package com.njcit.springboot_demo.controller;
 
-import com.njcit.springboot_demo.mapper.DepartmentMapper;
-import com.njcit.springboot_demo.mapper.EmployeeMapper;
 import com.njcit.springboot_demo.pojo.Department;
 import com.njcit.springboot_demo.pojo.Employee;
+import com.njcit.springboot_demo.servlet.DepartmentService;
+import com.njcit.springboot_demo.servlet.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +22,9 @@ import java.util.Collection;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeMapper employeeMapper;
+    private EmployeeService employeeService;
     @Autowired
-    private DepartmentMapper departmentMapper;
+    private DepartmentService departmentService;
 
     /**
      * 获取所有员工信息
@@ -33,7 +33,7 @@ public class EmployeeController {
      */
     @GetMapping(value = "/emplist")
     public String empList(Model model){
-        Collection<Employee> empList = employeeMapper.getAll();
+        Collection<Employee> empList = employeeService.getAll();
         model.addAttribute("emps",empList);
         return "emp/list";
     }
@@ -44,7 +44,7 @@ public class EmployeeController {
      */
     @GetMapping(value = "/addemp")
     public String addEmp(Model model){
-        Collection<Department> departments = departmentMapper.getDepartments();
+        Collection<Department> departments = departmentService.getDepartments();
         model.addAttribute("departments",departments);
         return "emp/add";
     }
@@ -55,7 +55,7 @@ public class EmployeeController {
      */
     @PostMapping(value = "/saveemp")
     public String saveEmp(Employee employee){
-        employeeMapper.save(employee);
+        employeeService.save(employee);
         return "redirect:/emplist";
     }
 
@@ -66,8 +66,8 @@ public class EmployeeController {
      */
     @GetMapping(value = "/emp/{empId}")
     public String toUpdateEmp(@PathVariable(value = "empId") Integer empId,Model model){
-        Employee employee = employeeMapper.getEmpById(empId);
-        Collection<Department> departments = departmentMapper.getDepartments();
+        Employee employee = employeeService.getEmpById(empId);
+        Collection<Department> departments = departmentService.getDepartments();
         model.addAttribute("employee",employee);
         /**获取所有的部门信息*/
         model.addAttribute("departments",departments);
@@ -81,7 +81,18 @@ public class EmployeeController {
      */
     @PostMapping(value = "/updateEmp")
     public String updateEmp(Employee employee){
-        employeeMapper.save(employee);
+        employeeService.update(employee);
+        return "redirect:/emplist";
+    }
+
+    /**
+     * 根据empId删除对应员工
+     * @param empId
+     * @return
+     */
+    @GetMapping(value = "/delemp/{empId}")
+    public String delEmp(@PathVariable(value = "empId") Integer empId){
+        employeeService.delete(empId);
         return "redirect:/emplist";
     }
 }

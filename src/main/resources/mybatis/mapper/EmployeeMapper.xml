@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njcit.springboot_demo.mapper.EmployeeMapper">
+
+    <resultMap id="employee" type="com.njcit.springboot_demo.pojo.Employee">
+        <id property="empId" column="emp_id" jdbcType="INTEGER"></id>
+        <result property="lastName" column="emp_name" jdbcType="VARCHAR"></result>
+        <result property="gender" column="gender" jdbcType="CHAR"></result>
+        <result property="email" column="email" jdbcType="VARCHAR"></result>
+        <result property="dId" column="d_id" jdbcType="INTEGER"></result>
+        <association property="department" javaType="com.njcit.springboot_demo.pojo.Department">
+            <id property="departId" column="dept_id" jdbcType="INTEGER"></id>
+            <result property="departmentName" column="dept_name" jdbcType="VARCHAR"></result>
+        </association>
+    </resultMap>
+
+    <sql id="Dept_Column_List">
+     e.emp_id, e.emp_name, e.gender, e.email, e.d_id,d.dept_id,d.dept_name
+    </sql>
+
+    <select id="getAll" resultMap="employee">
+        select
+        <include refid="Dept_Column_List"></include>
+        from t_employee e
+        join t_dept d
+        on e.d_id=d.dept_id
+    </select>
+
+
+    <insert id="save" parameterType="com.njcit.springboot_demo.pojo.Employee">
+        insert into
+        t_employee (emp_name, gender, email, d_id)
+        values (#{lastName}, #{gender},#{email}, #{dId})
+    </insert>
+
+
+    <select id="getEmpById" resultMap="employee" parameterType="integer">
+        select
+        <include refid="Dept_Column_List"></include>
+        from t_employee e
+        join t_dept d
+        on e.d_id=d.dept_id
+        where e.emp_id=#{empId}
+    </select>
+
+
+    <delete id="delete" parameterType="integer">
+        delete from t_employee
+        where emp_id=#{empId}
+    </delete>
+
+    <update id="update" parameterType="com.njcit.springboot_demo.pojo.Employee">
+        update t_employee
+        set emp_name = #{lastName},
+        gender = #{gender},
+        email = #{email},
+        d_id = #{dId}
+        where emp_id = #{empId}
+    </update>
+
+
+</mapper>

@@ -1,8 +1,8 @@
 package com.njcit.springboot_demo.controller;
 
-import com.njcit.springboot_demo.pojo.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
@@ -19,6 +19,14 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    /**
+     * 登陆功能
+     * @param username
+     * @param password
+     * @param model
+     * @param request
+     * @return
+     */
     @PostMapping(value = "/user/login")
     public String login(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password, Model model, HttpServletRequest request){
 
@@ -33,5 +41,15 @@ public class LoginController {
             model.addAttribute("msg","用户名或者密码错误");
             return "index";
         }
+    }
+
+    /**
+     * 注销功能,session失效
+     * @return
+     */
+    @GetMapping(value = "/user/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/index";
     }
 }

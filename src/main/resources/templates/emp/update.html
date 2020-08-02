@@ -63,17 +63,17 @@
 						<div class="form-group">
 							<label>性别</label><br/>
 							<div class="form-check form-check-inline">
-								<input th:checked="${employee.getGender()==1}" class="form-check-input" type="radio" name="gender" value="1">
-								<label class="form-check-label">女</label>
+								<input th:checked="${employee.getGender().equals('M')}" class="form-check-input" type="radio" name="gender" value="M">
+								<label class="form-check-label">男</label>
 							</div>
 							<div class="form-check form-check-inline">
-								<input th:checked="${employee.getGender()==0}" class="form-check-input" type="radio" name="gender" value="0">
-								<label class="form-check-label">男</label>
+								<input th:checked="${employee.getGender().equals('F')}" class="form-check-input" type="radio" name="gender" value="F">
+								<label class="form-check-label">女</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<label>部门选择</label>
-							<select class="form-control" name="department.departId">
+							<select class="form-control" name="dId">
 								<option th:selected="${dept.getDepartId()==employee.getDepartment().getDepartId()}"
 									th:each="dept:${departments}"
 									th:text="${dept.getDepartmentName()}"

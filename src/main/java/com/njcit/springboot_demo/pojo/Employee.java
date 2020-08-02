@@ -1,5 +1,6 @@
 package com.njcit.springboot_demo.pojo;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,16 +20,9 @@ public class Employee {
     private String lastName;
     private String email;
     /** 0：男，1：女*/
-    private Integer gender;
+    private String gender;
+    private Integer dId;
     private Department department;
     private Date birth;
 
-    public Employee(Integer empId, String lastName, String email, Integer gender, Department department) {
-        this.empId = empId;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.department = department;
-        this.birth = new Date();
-    }
 }
