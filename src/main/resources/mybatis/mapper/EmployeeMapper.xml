@@ -8,6 +8,7 @@
         <result property="gender" column="gender" jdbcType="CHAR"></result>
         <result property="email" column="email" jdbcType="VARCHAR"></result>
         <result property="dId" column="d_id" jdbcType="INTEGER"></result>
+        <result property="birth" column="birth" jdbcType="DATE"></result>
         <association property="department" javaType="com.njcit.springboot_demo.pojo.Department">
             <id property="departId" column="dept_id" jdbcType="INTEGER"></id>
             <result property="departmentName" column="dept_name" jdbcType="VARCHAR"></result>
@@ -15,7 +16,7 @@
     </resultMap>
 
     <sql id="Dept_Column_List">
-     e.emp_id, e.emp_name, e.gender, e.email, e.d_id,d.dept_id,d.dept_name
+     e.emp_id, e.emp_name, e.gender, e.email,e.birth, e.d_id,d.dept_id,d.dept_name
     </sql>
 
     <select id="getAll" resultMap="employee">
@@ -29,8 +30,8 @@
 
     <insert id="save" parameterType="com.njcit.springboot_demo.pojo.Employee">
         insert into
-        t_employee (emp_name, gender, email, d_id)
-        values (#{lastName}, #{gender},#{email}, #{dId})
+        t_employee (emp_name, gender, email, d_id,birth)
+        values (#{lastName}, #{gender},#{email}, #{dId},#{birth})
     </insert>
 
 
@@ -54,7 +55,8 @@
         set emp_name = #{lastName},
         gender = #{gender},
         email = #{email},
-        d_id = #{dId}
+        d_id = #{dId},
+        birth=#{birth}
         where emp_id = #{empId}
     </update>
 
