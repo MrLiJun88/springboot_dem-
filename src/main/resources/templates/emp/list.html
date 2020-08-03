@@ -74,7 +74,7 @@
                         <td th:text="${emp.getGender().equals('M')? '男':'女'}"/>
                         <!-- emp.department.getDepartmentName() -->
                         <td th:text="${emp.department.getDepartmentName()}"/>
-                        <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"/>
+                        <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd')}"/>
                         <td>
                             <a class="btn btn-sm btn-primary" th:href="@{'/emp/'+${emp.getEmpId()}}">编辑</a>
                             <a class="btn btn-sm btn-danger" th:href="@{'/delemp/'+${emp.getEmpId()}}">删除</a>
